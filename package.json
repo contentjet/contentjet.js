@@ -1,6 +1,6 @@
 {
   "name": "contentjet",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "SDK for contentjet.io",
   "main": "index.js",
   "scripts": {
