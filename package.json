@@ -1,6 +1,6 @@
 {
   "name": "contentjet",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "SDK for contentjet.io",
   "main": "index.js",
   "scripts": {
@@ -10,8 +10,8 @@
   "author": "Will Dady",
   "license": "ISC",
   "repository": {
-    "type" : "git",
-    "url" : "https://github.com/contentjet/contentjet.js"
+    "type": "git",
+    "url": "https://github.com/contentjet/contentjet.js"
   },
   "devDependencies": {
     "axios": "^0.13.1",
