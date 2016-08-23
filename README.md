@@ -14,7 +14,7 @@ This library depends on a native ES6 Promise implementation to be [supported](ht
 
 # Example
 
-```
+```javascript
 const contentjet = require('contentjet');
 
 // Create the contentjet client
