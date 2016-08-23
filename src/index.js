@@ -1,8 +1,9 @@
 const axios = require('axios');
 
 
-const getClient = (projectUUID, apiKey) => {
-
+const getClient = (options) => {
+  let projectUUID = options.projectUUID;
+  let apiKey = options.projectUUID;
   const instance = axios.create({
     baseURL: `https://api.contentjet.io/v1/project/${projectUUID}/`,
     timeout: 10000,
