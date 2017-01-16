@@ -2,12 +2,10 @@ const axios = require('axios');
 
 
 const getClient = (options) => {
-  let projectUUID = options.projectUUID;
-  let apiKey = options.projectUUID;
   const instance = axios.create({
-    baseURL: `https://api.contentjet.io/v1/project/${projectUUID}/`,
+    baseURL: `https://api.contentjet.io/v1/project/${options.projectUUID}/`,
     timeout: 10000,
-    headers: { 'Authorization': `Bearer ${apiKey}` }
+    headers: { 'Authorization': `Bearer ${options.apiKey}` }
   });
 
   const getProject = () => {
