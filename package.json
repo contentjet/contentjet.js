@@ -14,7 +14,7 @@
     "url": "https://github.com/contentjet/contentjet.js"
   },
   "dependencies": {
-    "axios": "^0.13.1"
+    "axios": "^0.15.3"
   },
   "devDependencies": {
     "babel": "^6.5.2",
