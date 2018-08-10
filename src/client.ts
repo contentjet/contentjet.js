@@ -13,6 +13,8 @@ interface IListEntriesParams {
   nonPublished?: number;
   search?: string;
   orderBy?: string;
+  page?: number;
+  pageSize?: number;
 }
 
 class Client {

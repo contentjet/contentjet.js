@@ -11,6 +11,8 @@ interface IListEntriesParams {
     nonPublished?: number;
     search?: string;
     orderBy?: string;
+    page?: number;
+    pageSize?: number;
 }
 declare class Client {
     isAuthenticated: boolean;
