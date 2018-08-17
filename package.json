@@ -1,8 +1,9 @@
 {
   "name": "contentjet",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Node.js SDK for Contentjet CMS",
   "main": "dist/client.js",
+  "types": "dist/client.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc"
