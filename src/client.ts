@@ -1,13 +1,13 @@
 import axios, { AxiosInstance } from 'axios';
 
-export interface IClientOptions {
+interface IClientOptions {
   baseUrl: string;
   projectId: number;
   clientId: string;
   clientSecret: string;
 }
 
-export interface IListEntriesParams {
+interface IListEntriesParams {
   entryType?: number;
   tags?: string;
   nonPublished?: number;
@@ -17,7 +17,7 @@ export interface IListEntriesParams {
   pageSize?: number;
 }
 
-export interface IEntryListItem {
+interface IEntryListItem {
   id: number;
   projectId: number;
   name: string;
@@ -27,14 +27,14 @@ export interface IEntryListItem {
   modifiedAt: string;
 }
 
-export interface IEntryListResponse {
+interface IEntryListResponse {
   page: number;
   totalPages: number;
   totalRecords: number;
   results: IEntryListItem[];
 }
 
-export interface IUser {
+interface IUser {
   id: number;
   email: string;
   name: string;
@@ -44,7 +44,7 @@ export interface IUser {
   modifiedAt: string;
 }
 
-export interface IEntryType {
+interface IEntryType {
   id: number;
   projectId: number;
   userId: number;
@@ -55,7 +55,7 @@ export interface IEntryType {
   modifiedAt: string;
 }
 
-export interface IEntry {
+interface IEntry {
   id: number;
   entryTypeId: number;
   userId: number;
