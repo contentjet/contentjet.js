@@ -21,10 +21,11 @@ class Client {
         this.client = axios_1.default.create({
             baseURL: this.options.baseUrl,
             headers: {
-                'Authorization': `Bearer ${response.data.access_token}`
+                Authorization: `Bearer ${response.data.access_token}`
             }
         });
         this.isAuthenticated = true;
+        return this;
     }
     async getEntry(entryId) {
         const response = await this.client.get(`/project/${this.options.projectId}/entry/${entryId}`);

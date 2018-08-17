@@ -1,11 +1,10 @@
-import { AxiosInstance } from 'axios';
-interface IClientOptions {
+export interface IClientOptions {
     baseUrl: string;
     projectId: number;
     clientId: string;
     clientSecret: string;
 }
-interface IListEntriesParams {
+export interface IListEntriesParams {
     entryType?: number;
     tags?: string;
     nonPublished?: number;
@@ -14,14 +13,63 @@ interface IListEntriesParams {
     page?: number;
     pageSize?: number;
 }
+export interface IEntryListItem {
+    id: number;
+    projectId: number;
+    name: string;
+    metadata: string;
+    description: string;
+    createdAt: string;
+    modifiedAt: string;
+}
+export interface IEntryListResponse {
+    page: number;
+    totalPages: number;
+    totalRecords: number;
+    results: IEntryListItem[];
+}
+export interface IUser {
+    id: number;
+    email: string;
+    name: string;
+    isActive: boolean;
+    isAdmin: boolean;
+    createdAt: string;
+    modifiedAt: string;
+}
+export interface IEntryType {
+    id: number;
+    projectId: number;
+    userId: number;
+    name: string;
+    metadata: string;
+    description: string;
+    createdAt: string;
+    modifiedAt: string;
+}
+export interface IEntry {
+    id: number;
+    entryTypeId: number;
+    userId: number;
+    modifiedByUserId: string;
+    name: string;
+    published: string;
+    fields: any;
+    createdAt: string;
+    modifiedAt: string;
+    user: IUser;
+    entryType: IEntryType;
+    tags: string[];
+    modifiedByUser: IUser;
+}
 declare class Client {
-    isAuthenticated: boolean;
-    options: IClientOptions;
-    client: AxiosInstance;
+    private isAuthenticated;
+    private options;
+    private client;
     constructor(options: IClientOptions);
-    authenticate(): Promise<void>;
-    getEntry(entryId: number): Promise<any>;
-    listEntries(params: IListEntriesParams): Promise<any>;
+    authenticate(): Promise<Client>;
+    getEntry(entryId: number): Promise<IEntry>;
+    listEntries(params?: IListEntriesParams): Promise<IEntryListResponse>;
     getEntryType(entryTypeId: number): Promise<any>;
     listEntryTypes(): Promise<any>;
 }

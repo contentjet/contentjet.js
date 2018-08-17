@@ -1,13 +1,13 @@
 import axios, { AxiosInstance } from 'axios';
 
-interface IClientOptions {
+export interface IClientOptions {
   baseUrl: string;
   projectId: number;
   clientId: string;
   clientSecret: string;
 }
 
-interface IListEntriesParams {
+export interface IListEntriesParams {
   entryType?: number;
   tags?: string;
   nonPublished?: number;
@@ -17,11 +17,65 @@ interface IListEntriesParams {
   pageSize?: number;
 }
 
+export interface IEntryListItem {
+  id: number;
+  projectId: number;
+  name: string;
+  metadata: string;
+  description: string;
+  createdAt: string;
+  modifiedAt: string;
+}
+
+export interface IEntryListResponse {
+  page: number;
+  totalPages: number;
+  totalRecords: number;
+  results: IEntryListItem[];
+}
+
+export interface IUser {
+  id: number;
+  email: string;
+  name: string;
+  isActive: boolean;
+  isAdmin: boolean;
+  createdAt: string;
+  modifiedAt: string;
+}
+
+export interface IEntryType {
+  id: number;
+  projectId: number;
+  userId: number;
+  name: string;
+  metadata: string;
+  description: string;
+  createdAt: string;
+  modifiedAt: string;
+}
+
+export interface IEntry {
+  id: number;
+  entryTypeId: number;
+  userId: number;
+  modifiedByUserId: string;
+  name: string;
+  published: string;
+  fields: any;
+  createdAt: string;
+  modifiedAt: string;
+  user: IUser;
+  entryType: IEntryType;
+  tags: string[];
+  modifiedByUser: IUser;
+}
+
 class Client {
 
-  isAuthenticated: boolean;
-  options: IClientOptions;
-  client: AxiosInstance;
+  private isAuthenticated: boolean;
+  private options: IClientOptions;
+  private client: AxiosInstance;
 
   constructor(options: IClientOptions) {
     this.isAuthenticated = false;
@@ -31,7 +85,7 @@ class Client {
     });
   }
 
-  async authenticate() {
+  public async authenticate(): Promise<Client> {
     const response = await this.client.post(
       `/project/${this.options.projectId}/client/authenticate`,
       {
@@ -43,37 +97,38 @@ class Client {
     this.client = axios.create({
       baseURL: this.options.baseUrl,
       headers: {
-        'Authorization': `Bearer ${response.data.access_token}`
+        Authorization: `Bearer ${response.data.access_token}`
       }
     });
     this.isAuthenticated = true;
+    return this as Client;
   }
 
-  async getEntry(entryId: number): Promise<any> {
+  public async getEntry(entryId: number): Promise<IEntry> {
     const response = await this.client.get(
       `/project/${this.options.projectId}/entry/${entryId}`
     );
-    return response.data;
+    return response.data as IEntry;
   }
 
-  async listEntries(params: IListEntriesParams) {
+  public async listEntries(params?: IListEntriesParams): Promise<IEntryListResponse> {
     const response = await this.client.get(
       `/project/${this.options.projectId}/entry/`,
       {
         params
       }
-    )
-    return response.data;
+    );
+    return response.data as IEntryListResponse;
   }
 
-  async getEntryType(entryTypeId: number): Promise<any> {
+  public async getEntryType(entryTypeId: number): Promise<any> {
     const response = await this.client.get(
       `/project/${this.options.projectId}/entry-type/${entryTypeId}`
     );
     return response.data;
   }
 
-  async listEntryTypes(): Promise<any> {
+  public async listEntryTypes(): Promise<any> {
     const response = await this.client.get(
       `/project/${this.options.projectId}/entry-type/`
     );
